@@ -9,6 +9,18 @@ const createBtn = document.querySelector('button[data-create]');
 const destroyBtn = document.querySelector('button[data-destroy]');
 const rootBox = document.querySelector("#boxes");
 
+const isValid = (amount) => {
+  const amountNumber = Number.parseInt(amount);
+
+  if (isNaN(amountNumber) || amountNumber > 100 || amountNumber < 0) {
+    alert('Amount of boxes is out of range [1-100]');
+
+    return false;
+  }
+
+  return true;
+};
+
 const createDiv = (side) => {
   const div = document.createElement("div");
   div.style.width = div.style.height = `${side}px`;
@@ -30,7 +42,7 @@ const getBoxes = (amount, start, step) => {
 }
 
 const createBoxes = (amount) => {
-  if (amount === "" || amount > 100 && amount < 0) {
+  if (!isValid(amount)) {
     return;
   }
 
